@@ -1,3 +1,4 @@
+000-ar71xx-tiny_reduce_kernelsize.patch
 001-mac80211_mesh_no_fwding_by_default.patch
 002-add_ramips-nexx-image.patch
 004-openwrt-release_use_configured_revision.patch
