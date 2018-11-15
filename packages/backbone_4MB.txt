@@ -38,7 +38,7 @@ luci-lib-nixio
 uhttpd
 uhttpd-mod-ubus
 #px5g-mbedtls
-luci-mod-freifunk-ui
+luci-mod-freifunk
 luci-mod-admin-full
 luci-app-olsr
 luci-app-olsr-services
