@@ -72,6 +72,7 @@ batctl-default
 
 # Uplink
 freifunk-berlin-uplink-tunnelberlin-tunneldigger-files
+luci-app-vpnbypass
 
 # Statistics
 luci-app-statistics
