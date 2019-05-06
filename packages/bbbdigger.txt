@@ -51,6 +51,7 @@ luci-i18n-statistics-en
 # OLSR
 olsrd
 olsrd-mod-arprefresh
+olsrd-mod-drophna
 olsrd-mod-dyn-gw
 olsrd-mod-jsoninfo
 olsrd-mod-txtinfo
@@ -77,3 +78,5 @@ collectd-mod-memory
 
 # tunneldigger-broker
 python-tunneldigger-broker
+ebtables
+
