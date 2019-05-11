@@ -1,0 +1,56 @@
+--- a/feeds/routing/olsrd/Makefile
++++ b/feeds/routing/olsrd/Makefile
+@@ -12,9 +12,9 @@ PKG_VERSION:=0.9.7
+ PKG_RELEASE=$(PKG_SOURCE_VERSION)
+ 
+ PKG_SOURCE_PROTO:=git
+-PKG_SOURCE_URL:=https://github.com/OLSR/olsrd.git
++PKG_SOURCE_URL:=https://github.com/freifunk-berlin/olsrd.git
+ PKG_SOURCE_SUBDIR:=$(PKG_NAME)-$(PKG_VERSION)
+-PKG_SOURCE_VERSION:=v0.9.7
++PKG_SOURCE_VERSION:=413c16f2be7770041a6e533d6bed56ddc763c1af
+ PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-$(PKG_SOURCE_VERSION).tar.gz
+ 
+ PKG_BUILD_PARALLEL:=0
+@@ -56,6 +56,12 @@ define Package/olsrd-mod-dot-draw
+   TITLE:=Dot topology information plugin
+ endef
+ 
++define Package/olsrd-mod-drophna
++  $(call Package/olsrd/template)
++  DEPENDS:=olsrd
++  TITLE:=Drop HNA plugin
++endef
++
+ define Package/olsrd-mod-bmf
+   $(call Package/olsrd/template)
+   DEPENDS:=olsrd +kmod-tun
+@@ -170,7 +176,7 @@ MAKE_FLAGS+= \
+ 	DESTDIR="$(PKG_INSTALL_DIR)" \
+ 	STRIP="true" \
+ 	INSTALL_LIB="true" \
+-	SUBDIRS="arprefresh bmf dot_draw dyn_gw dyn_gw_plain httpinfo jsoninfo netjson mdns nameservice p2pd pgraph pud quagga secure sgwdynspeed txtinfo watchdog"
++	SUBDIRS="arprefresh bmf dot_draw drophna dyn_gw dyn_gw_plain httpinfo jsoninfo netjson mdns nameservice p2pd pgraph pud quagga secure sgwdynspeed txtinfo watchdog"
+ 
+ define Build/Compile
+ 	$(call Build/Compile/Default,all)
+@@ -202,6 +208,11 @@ define Package/olsrd-mod-dot-draw/instal
+ 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/lib/dot_draw/olsrd_dot_draw.so.* $(1)/usr/lib/
+ endef
+ 
++define Package/olsrd-mod-drophna/install
++	$(INSTALL_DIR) $(1)/usr/lib
++	$(INSTALL_BIN) $(PKG_BUILD_DIR)/lib/drophna/olsrd_drophna.so.* $(1)/usr/lib/
++endef
++
+ define Package/olsrd-mod-bmf/install
+ 	$(INSTALL_DIR) $(1)/usr/lib
+ 	$(INSTALL_BIN) $(PKG_BUILD_DIR)/lib/bmf/olsrd_bmf.so.* $(1)/usr/lib/
+@@ -293,6 +304,7 @@ endef
+ $(eval $(call BuildPackage,olsrd))
+ $(eval $(call BuildPackage,olsrd-mod-arprefresh))
+ $(eval $(call BuildPackage,olsrd-mod-dot-draw))
++$(eval $(call BuildPackage,olsrd-mod-drophna))
+ $(eval $(call BuildPackage,olsrd-mod-bmf))
+ $(eval $(call BuildPackage,olsrd-mod-dyn-gw))
+ $(eval $(call BuildPackage,olsrd-mod-dyn-gw-plain))
